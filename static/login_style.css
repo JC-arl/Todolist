@@ -1,0 +1,46 @@
+body{
+    height: 100vh;
+    background: linear-gradient(#FBFCFD, #D9EAFD);
+}
+.layout{
+    display: grid;
+    place-items: center;
+
+    line-height: 100%;
+}
+
+#loginpage_title{
+    color: #225A98;
+    font-size: 96px;
+    font-weight: 400;
+    margin-top: 150px;
+    height: 154px;
+    top: 64px;
+    left: 300px;
+    border: 1px;
+
+}
+.header{
+    width: 517px;
+    height: 154px;
+    top: 64px;
+    left: 300px;
+    border: 1px;
+}
+.button{
+    width: 313px;
+    height: 62px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 70px;
+}
+#sign_in{
+    background-color: #225A98;
+    color: #FBFCFD;
+
+}
+#sign_up{
+    background-color: #F8FAFC;
+    color: #225A98;
+
+}

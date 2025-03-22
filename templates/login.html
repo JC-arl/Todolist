@@ -1,11 +1,24 @@
 <!DOCTYPE html>
+
+{% load static %}
 <html>
     <head>
-        <title>To Do List</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'login_style.css' %}">
     </head>
     <body>
-        <span>
-            로그인하기
-        </span>
+        <div class="layout">
+            <h1 id="loginpage_title">
+                To Do List
+            </h1>
+            <button class= "button" id="sign_in">
+                로그인하기
+            </button>
+            
+            <button class= "button" id="sign_up">
+                회원가입 하기
+            </button>
+        </div>
+
     </body>
 </html>
