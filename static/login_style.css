@@ -28,6 +28,7 @@ body{
     border: 1px;
 }
 .button{
+    cursor: pointer;
     width: 313px;
     height: 62px;
     border-radius: 8px;
@@ -44,3 +45,25 @@ body{
     color: #225A98;
 
 }
+#id_input{
+    width: 447px;
+    height: 62px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    background-color: #F3F9FF;
+    color: black;
+    font-size: 20px;
+}
+#pwd_input{
+    width: 447px;
+    height: 62px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    background-color: #F3F9FF;
+    color: black;
+    font-size: 20px;
+}
+
+
