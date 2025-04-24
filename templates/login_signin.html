@@ -7,28 +7,38 @@
         <link rel="stylesheet" href="{% static 'login_style.css' %}">
     </head>
     <body>
-        <div class="layout">
+        <div class="login_layout">
             <h1 id="loginpage_title">
-                To Do List
+                <a href="{% url 'login_main' %}" style="text-decoration: none; color: inherit;">To Do List</a>
             </h1>
+            {% if messages %}
+                <ui class="message">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ui>
+            {% endif %}
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_input">
+                        아이디
+                    </label>
+                    <input type="text" id="id_input" name="id_input">
+                </div><br>
 
-            <div style="text-align: left;">
-                <label for="id_input">
-                    아이디
-                </label><br>
-                <input type="text" id="id_input">
-            </div><br>
-
-            <div style="text-align: left;">
-                <label for="pwd_input" style="text-align: left;">
-                    비밀번호
-                </label><br>
-                <input type="password" id="pwd_input">
-            </div>
-            <form action="{% url 'login_page' %}" method="get"></form>
-                <button class="button" id="sign_in">
-                    로그인
-                </button>
+                <div class="form-group">
+                    <label for="pwd_input">
+                        비밀번호
+                    </label>
+                    <input type="password" id="pwd_input" name="pwd_input">
+                </div>
+                
+                    <button class="button" id="login_btn">
+                        로그인
+                    </button>
             </form>
 
 
