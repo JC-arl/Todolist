@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title To Do List></title>
+</head>
+<body>
+    <div class = "header">
+        <h1> To Do List</h1>
+        <span>{{user.username}}님 / <a href="{% url 'logout' %}">로그아웃</a></span>
+    </div>
+</body>
+</html>

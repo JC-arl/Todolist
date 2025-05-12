@@ -78,8 +78,13 @@ STATICFILES_DIRS=[
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'todo_db',
+        'USER': 'root',
+        'PASSWORD': '6084',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 

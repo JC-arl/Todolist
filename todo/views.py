@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.hashers import check_password, make_password
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -18,9 +18,10 @@ def login_signup(request):
 
 @login_required    #로그인 확인된 사용자만 main_page 접근 가능
 def main_page(request):
+    user = request.user
     return render(request, 'main_page.html',{})
 
-def login(request):
+def UserLogin(request):
     respons_data = {}
     if request.method == 'POST':
         login_id = request.POST.get('id_input','')
@@ -52,7 +53,7 @@ def signup(request):
         return redirect('login_signin')
     return render(request, 'login_signup.html',{})
 
-def logout(request):
+def user_logout(request):
     logout(request)
     return redirect('login_main')
 
