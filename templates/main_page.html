@@ -5,11 +5,37 @@
 <head>
     <meta charset="UTF-8">
     <title To Do List></title>
+    <!-- defer를 쓰면 JS가 HTML 로딩 후 실행되어 에러를 방지할 수 있어요 -->
+    <script src="{% static 'js/todo.js'%}" defer></script>
+    <link rel="stylesheet" href="{%static 'todo_style.css' %}">
 </head>
 <body>
     <div class = "header">
         <h1> To Do List</h1>
-        <span>{{user.username}}님 / <a href="{% url 'logout' %}">로그아웃</a></span>
+        <div class="user-section">
+            <!-- <img src="{%static 'image/account-circle.png'%}" class="user_icon" alt="User Icon"> -->
+            <span class="user_name">{{user.username}}님</span> /
+            <a href="{% url 'logout' %}" class="logout-link">로그아웃</a>
+        </div>
+    </div>
+    <div class="todo-card">
+        <div class="todo-section">
+            <span class="todo-header">to do</span>
+            <button class="plus-button" onclick="toggleForm()">+</button>
+
+        </div>
+        <hr class="underline">
+        <!-- 할 일 목록 -->
+        <div id="todoList">
+            <div class="todo-item">
+            <div>
+                <strong>알고리즘 공부하기</strong><br>
+                <small>2025.03.06까지</small>
+            </div>
+            <div class="check-circle">○</div>
+            
+            </div>
+
     </div>
 </body>
 </html>
