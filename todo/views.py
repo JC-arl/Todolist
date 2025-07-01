@@ -57,5 +57,16 @@ def user_logout(request):
     logout(request)
     return redirect('login_main')
 
-        
-
+@login_required
+def todo_list(request):
+    todos = Todo.objects.filter(user=request.user, is_done=False) # 로그인한 사용자의 할 일 목록 조회
+    form = TodoForm()            # 폼 초기화
+    
+    if request.method == 'POST':            # POST 요청이 있을 경우
+        form = TodoForm(request.POST)      # 폼 데이터 저장
+        if form.is_valid():               # 폼 데이터 유효성 검사
+            todo = form.save(commit=False) # 데이터베이스에 저장하지 않고 메모리에 저장
+            todo.user = request.user       # 로그인한 사용자 연결
+            todo.save()                    # 데이터베이스에 저장
+            return redirect('todo_list')   # 목록 페이지로 리다이렉트
+    return render(request, 'main_page.html', {'todos':todos, 'form':form}) # 목록 페이지 렌더링
