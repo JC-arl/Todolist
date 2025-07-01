@@ -24,24 +24,26 @@
     <div class="todo-card">
         <div class="todo-header">
             <strong>to do</strong>
-            <!-- <form method="post" style="display: inline;">
+            <form method="post" style="display: inline;">
                 {% csrf_token %}
                 {{form.title}}
                 {{form.due_date}}
-            </form> -->
+            </form>
             <button onclick="openModal()">+</button>
             <!-- 모달 오버레이 -->
             <div id="addTodoModal" class="modal-overlay">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal()">x</span>
-                    <form method="post" style="border: 1px solid #3C70A9; border-radius: 5px; padding: 10px;">
+                    <form method="post" >
                         {% csrf_token %}
-                        <label><strong>• TO DO 입력</strong></label>
-                        {{forms.title}}<br><br>
-                        <label><strong>• TO DO 기한 설정</strong></label>
-                        {{forms.due_date}}<br><br>
-                        <button type="button" onclick="closeModal()">취소</button>
-                        <button type="submit">저장 후 닫기기</button>
+                        <label><strong>• TO DO 입력</strong></label><br>
+                        {{form.title}}<br><br>
+                        <label><strong>• TO DO 기한 설정</strong></label><br>
+                        {{form.due_date}}<br><br>
+                        <div style="text-align: right;">
+                            <button type="button" onclick="closeModal()">취소</button>
+                            <button type="submit">저장 후 닫기기</button>
+                        </div>
                     </form>
                         
                 </div>
