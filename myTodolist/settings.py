@@ -82,7 +82,7 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'NAME': 'todo_db',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': '6084',
         'HOST': 'localhost',
         'PORT': '3306'
     }

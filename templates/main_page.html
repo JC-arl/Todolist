@@ -20,47 +20,99 @@
             <a href="{% url 'logout' %}" class="logout-link">로그아웃</a>
         </div>
     </div>
-    <!-- 할 일 목록 카드 -->
-    <div class="todo-card">
-        <div class="todo-header">
-            <strong>to do</strong>
-            <form method="post" style="display: inline;">
-                {% csrf_token %}
-                {{form.title}}
-                {{form.due_date}}
-            </form>
-            <button onclick="openModal()">+</button>
-            <!-- 모달 오버레이 -->
-            <div id="addTodoModal" class="modal-overlay">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">x</span>
-                    <form method="post" >
-                        {% csrf_token %}
-                        <label><strong>• TO DO 입력</strong></label><br>
-                        {{form.title}}<br><br>
-                        <label><strong>• TO DO 기한 설정</strong></label><br>
-                        {{form.due_date}}<br><br>
-                        <div style="text-align: right;">
-                            <button type="button" onclick="closeModal()">취소</button>
-                            <button type="submit">저장 후 닫기기</button>
-                        </div>
-                    </form>
-                        
+    <div class="todo-columns">
+        <!-- 할 일 목록 카드 -->
+        <div class="todo-card">
+            <div class="todo-header">
+                <div class="todo-modal-container">
+                    <strong>to do</strong>
+                    <button class="todo-modal-button" onclick="openModal()">+</button>
                 </div>
+                <!-- 모달 오버레이 -->
+                <div id="addTodoModal" class="modal-overlay">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">x</span>
+                        <form method="post" >
+                            {% csrf_token %}
+                            <span class="todo-icon">•</span>
+                            <span class="todo-label"><strong>  TO DO 입력</strong></label>
+                            {{form.title}}<br><br>
+                            <span class="todo-icon">•</span>
+                            <label class="todo-label"><strong>  TO DO 기한 설정</strong></label>
+                            {{form.due_date}}<br>
+                            <div class="modal-button-container">
+                                <button class="todo-cancel-button" type="button" onclick="closeModal()">취소</button>
+                                <button class="todo-save-button" type="submit">저장 후 닫기기</button>
+                            </div>
+                        </form>
+                            
+                    </div>
+                </div>
+                <hr class="underline">
+                <!-- 할 일 목록 -->
+                    <div id="todo-items">
+                    {% for todo in todos %}
+                    <div class="todo-item">
+                        <div class ="todo-content">
+                            <p class="todo-title">{{todo.title}}</p>
+                            <small class="todo-date">{{todo.due_date | date:"Y-M-d까지"}}</small>
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="todo-check">
+                            <span class="checkmark" for="todo-check"></span>
+                        </label>
+                    </div>
+                    {% endfor %}
+                    </div>
             </div>
-            
         </div>
-        <hr class="underline">
-        <!-- 할 일 목록 -->
-        <div id="todo-items">
-            {% for todo in todos %}
-            <div class="todo-item">
-                <p>{{todo.title}}</p>
-                <small>{{todo.due_date}}까지</small>            
+          <!-- End To Do -->
+        <div class="todo-card">
+            <div class="todo-header">
+            <div class="todo-modal-container">
+                <strong>end to do</strong>
             </div>
-            {% endfor %}
+            <hr class="underline">
+            <div id="done-items">
+                {% for todo in done_todos %}
+                <div class="todo-item">
+                <div class="todo-content">
+                    <p class="todo-title">{{todo.title}}</p>
+                </div>
+                <label class="checkbox-container">
+                    <input type="checkbox" checked disabled>
+                    <span class="checkmark"></span>
+                </label>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
         </div>
 
+        <!-- Not End To Do -->
+        <div class="todo-card">
+            <div class="todo-header">
+            <div class="todo-modal-container">
+                <strong>not end to do</strong>
+            </div>
+            <hr class="underline">
+            <div id="undone-items">
+                {% for todo in undone_todos %}
+                <div class="todo-item">
+                <div class="todo-content">
+                    <p class="todo-title" style="color: #BCCCDC;">{{todo.title}}</p>
+                </div>
+                <label class="checkbox-container">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+        </div>
     </div>
+
+
 </body>
 </html>

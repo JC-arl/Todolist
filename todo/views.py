@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Todo
+from .forms import TodoForm
+
 # Create your views here.
 def login_main(request):
     return render(request, 'login.html',{})
@@ -16,10 +19,29 @@ def login_signup(request):
     return render(request, 'login_signup.html',{})
 
 
-@login_required    #로그인 확인된 사용자만 main_page 접근 가능
+@login_required
 def main_page(request):
     user = request.user
-    return render(request, 'main_page.html',{})
+    todos = Todo.objects.filter(user=user, is_done=False)
+    done_todos = Todo.objects.filter(user=user, is_done=True)
+    undone_todos = Todo.objects.filter(user=user, is_done=False)
+    form = TodoForm()
+
+    if request.method == 'POST':
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)  # ← 여기서 'due_date' 값 확인 가능
+            todo = form.save(commit=False)
+            todo.user = request.user
+            todo.save()
+            return redirect('main_page')
+
+    return render(request, 'main_page.html', {
+        'todos': todos,
+        'form': form,
+        'done_todos': done_todos,
+        'undone_todos': undone_todos
+        })
 
 def UserLogin(request):
     respons_data = {}
@@ -65,6 +87,7 @@ def todo_list(request):
     if request.method == 'POST':            # POST 요청이 있을 경우
         form = TodoForm(request.POST)      # 폼 데이터 저장
         if form.is_valid():               # 폼 데이터 유효성 검사
+            print(form.cleaned_data)
             todo = form.save(commit=False) # 데이터베이스에 저장하지 않고 메모리에 저장
             todo.user = request.user       # 로그인한 사용자 연결
             todo.save()                    # 데이터베이스에 저장
